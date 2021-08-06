@@ -7,42 +7,51 @@ AUTHOR: Kunj Taneja (kunj017)
 
 # Program format and structure:
 
-1. The assembler:
-	* Uses single routine for both pases to assemble the program
-	* Handles any type of formatting in a line including leading or trailing white spaces.
-	* Case insensitive.
-	* Handles comments in the same line and separate lines
-	* Can get data in decimal, octal and hexadecimal 2s complement
-	* It can detect the following errors:
-		* Incorrect mnemonic
-		* Label name is a programming keyword
-		* Incorrect label naming format (allows for underscore in beginning but doesn't allow numerics - in start or other special characters)
-		* Label repeated
-		* Label missing
-		* Missing operand
-		* More operands than expected (incorrect operand format)
-	* It can detect the following warnings:
-		* Unused labels
-		* Possible numeric overflow
+### The assembler
+* Uses single routine for both pases to assemble the program
+* Handles any type of formatting in a line including leading or trailing white spaces.
+* Case insensitive.
+* Handles comments in the same line and separate lines
+* Can get data in decimal, octal and hexadecimal 2s complement
+* It can detect the following errors:
+	- Bogus mnemonic
+	- Invalid Label Name
+	- Repeated label Name
+	- Reference to an invalid label name
+	- Label name can not be a keyword
+	- Missing operand
+	- Unexpected operand
+	- Wrong format of numbers
+	- Invalid input format
+	- There can not be two labels in same line
+	- No label for set instruction
+	- Label not defined
+* Assembler can issue the following warnings:
+	- Unused label
+	- Infinite loops
 
-	* Keeps a track of mnemonic, opcodes and possible operands
-	* Keeps a track of the labels
-	* Generates a log file
-	* Generates an advanced listing file (showing the bytes produced for each instruction, and that instruction's mnemonic)
-	* Generates an object file
-	* Listing and object files are only created if there are no errors. They may be created if there are only warnings
-	* Assembles the pseudo instruction SET
+* Stores mnemonic and their opcodes.
+* Stores defined labels in program.
+* Uses single routine for both pases to assemble the program.
+* Generates an advanced listing file.
+* Generates an object file with .o extension
+* Listing and object files are empty if there are any errors.
+* Can implement the instruction SET.
 	
-2. The emulator:
+### The emulator
 
-	* Can load object file
-	* can produce memory dump
-	* can execute test program
-	* has -t (trace), -dump and -all options
-	* can detect errors:
-		* Incorrect machine code
-		* Segmentation fault
-		* Stack overflow
-		* Invalid opcode
-	* can print metadata such as number of instructions executed, hexadecimal forms, memory dump, commands can be changed during runtime
+* The emulator is interactive and can run single or multiple instructions according to user's input.
+
+* Assumes that set and data insrtuctions will be written only after halt statement and should never be run else can produce ambigious results.
+
+* Error handling: Throws error if instruction with invalid opcode comes, Throws error is segmentation fault occurs.
+
+* Functionalities:
+	- Single trace: Performs a single operation and shows current register values. ( Command: -t )
+	- Multiple trace: Performs a given number of operations and shows current register values. ( Command: -t 10 (Here 10 has the value in decimal))
+	- Full program trace: Performs all remaining operations. ( Command: -f )
+	- Memory dump: Shows current memory dump i.e. data values at all PC values(total PC = number of instructions)  ( Command: -bd )
+	- Show data: Displays the contents of given data location ( Command: -data 0xFF (Here the data has to be inputted as hexadecimal) )
+	- After memory dump: Performs all the instructions in a program and then dumps the final memory. ( Command: -ad )
+	- Show future instructions: Displays instructions written after current pc (displays at max 10 future instructions). ( Command: -u )
 
