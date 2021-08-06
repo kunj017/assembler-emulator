@@ -1,0 +1,154 @@
+/*****************************************************************************
+TITLE: Claims																																
+AUTHOR: Kunj Taneja (1801CS30)
+Declaration of Authorship
+This txt file, claims.txt, is part of the assignment of CS321 at the 
+department of Computer Science and Engg, IIT Patna . 
+*****************************************************************************/
+
+Files:
+==========
+*All the files i submitted, asm.c++ and claims.txt, have my name and student id at the start, along with a declaration of authorship.
+
+The evidence for Assembler including the output files from the test examples has also been uploaded. They are test1(3 output files), test2(3 output files), test3
+(3 output file),test4(3 output files), bubble(3 output files), testdata(3 output files). All the test files have been tested and work properly.
+
+
+*Programs are compilable with g++ asm.cpp -o asm.
+
+
+=============================
+Program format and structure:
+=============================
+1. The assembler:
+
+*	Can handle any type of input format like trailing spaces, no spaces between ':' or ';', many empty lines.
+
+*	Assembler can detect the following errors:
+	- Bogus mnemonic
+	- Invalid Label Name
+	- Repeated label Name
+	- Reference to an invalid label name
+	- Label name can not be a keyword
+	- Missing operand
+	- Unexpected operand
+	- Wrong format of numbers
+	- Invalid input format
+	- There can not be two labels in same line
+	- No label for set instruction
+	- Label not defined
+
+*	Assembler can issue the following warnings:
+	- Unused label
+	- Infinite loops
+
+*	Stores mnemonic and their opcodes.
+*	Stores defined labels in program.
+*	Uses single routine for both pases to assemble the program.
+*	Generates an advanced listing file.
+*	Generates an object file with .o extension
+*	Listing and object files are empty if there are any errors.
+*	Can implement the instruction SET.
+
+
+=============================
+Testing:
+=============================
+
+# To compile the asm.cpp file:
+g++ asm.cpp -o asm
+# to run a test file xyz.asm
+./asm xyz.asm
+
+1. The assembler:
+
+I have tested five examples shown as below. The errors only occurred in the file test2.asm and testdata.asm.
+
+The others were tested without any errors ( but warnings can be there ) detected and produced three output files: listing file, 
+error log file and machine readable object file, for each example. 
+ 
+
+1)
+
+#Input: asm test1.asm
+#Output: 
+a. test1.l 
+b. test1.log :
+
+Waring :: unused label: "label" at line 2
+Waring :: Infintite loop at line: 6
+
+c. test1.o
+
+2)
+#Input:asm test2.asm
+#Output: 
+a. test2.l 
+b. test2.log :
+
+Error at line 4: Repeated Label name
+Error at line 6: Wrong format of numbers
+Error at line 7: missing operand
+Error at line 8: unexpected operand
+Error at line 9: Wrong format of numbers
+Error at line 10: Invalid Label name
+Error at line 11: Bogus mnemonic
+Error at line 12: Bogus mnemonic
+Error at line 5: label not defined
+Waring :: unused label: "label" at line 3
+
+c. test2.o
+
+
+3)
+#Input:asm test3.asm
+#Output: 
+a. test3.l 
+b. test3.log (without any error messages)
+c. test3.o
+
+
+4)
+#Input:asm test4.asm
+#Output: 
+a. test4.l 
+b. test4.log (without any error messages)
+c. test4.o
+
+5)
+#Input:asm testdata.asm
+#Output: 
+a. testdata.l 
+b. testdata.log :
+
+Error at line 1: Label name can not be a keyword
+Error at line 6: invalid input format
+Error at line 8: missing operand
+Error at line 9: unexpected operand
+Error at line 11: missing operand
+Error at line 14: There can not be two labels in same line
+Error at line 15: Bogus mnemonic
+Waring :: unused label: "l2" at line 9
+Waring :: unused label: "l3" at line 10
+Waring :: unused label: "l4" at line 11
+Waring :: unused label: "label2" at line 4
+Waring :: unused label: "label3" at line 7
+Waring :: Infintite loop at line: 12
+Waring :: Infintite loop at line: 13
+Waring :: unused label: "mannat" at line 14
+Waring :: unused label: "papa" at line 15
+
+
+c. testdata.o
+
+6)
+
+#Input: bubble.asm
+#Output:
+a. bubble.l
+b. bubble.log ( Without any errors )
+c. bubble.o
+
+
+
+

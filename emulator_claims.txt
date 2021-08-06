@@ -1,0 +1,157 @@
+/*****************************************************************************
+TITLE: Claims																																
+AUTHOR: Kunj Taneja (1801CS30)
+Declaration of Authorship
+This txt file, claims.txt, is part of the assignment of CS321 at the 
+department of Computer Science and Engg, IIT Patna . 
+*****************************************************************************/
+
+Files:
+==========
+*All the files I submitted, emu.c++ and 180cs30_emu_claims.txt, have my name and student id at the start, along with a declaration of authorship.
+
+The evidence for Assembler including the output files from the test examples has also been uploaded. They are sum.asm, sum.o, max.asm, max.o, min.asm, min.o, bubblesort.asm, bubblesort.o 
+All the test files have been tested and work properly.
+All .o files are to be run, asm files are added just for the instructor to see what assembly code is written.
+
+
+=============================
+Program format and structure:
+=============================
+1. The emulator:
+
+* The emulator is interactive and can run single or multiple instructions according to user's input.
+
+* Assumes that set and data insrtuctions will be written only after halt statement and should never be run else can produce ambigious results.
+
+* Error handling: Throws error if instruction with invalid opcode comes, Throws error is segmentation fault occurs.
+
+* Functionalities:
+	- Single trace: Performs a single operation and shows current register values. ( Command: -t )
+	- Multiple trace: Performs a given number of operations and shows current register values. ( Command: -t 10 (Here 10 has the value in decimal))
+	- Full program trace: Performs all remaining operations. ( Command: -f )
+	- Memory dump: Shows current memory dump i.e. data values at all PC values(total PC = number of instructions)  ( Command: -bd )
+	- Show data: Displays the contents of given data location ( Command: -data 0xFF (Here the data has to be inputted as hexadecimal) )
+	- After memory dump: Performs all the instructions in a program and then dumps the final memory. ( Command: -ad )
+	- Show future instructions: Displays instructions written after current pc (displays at max 10 future instructions). ( Command: -u )	
+
+=============================
+Testing:
+=============================
+
+# To compile the emu.cpp file:
+g++ emu.cpp -o emu
+# to run a test file xyz.o
+./emu xyz.o
+
+1. The emulator:
+
+I have tested four examples shown as below.
+
+
+
+1)
+#Input:
+./emu sum.o
+
+#Output: 
+
+write -bd to see before memory dump
+
+Before Dump:
+
+00000010	FFFFFB01 FFFFEE10 00000012 00000001 
+00000014	00000002 00000003 00000004 00000005
+
+
+To complete whole program and see final memory write "-ad"
+
+After Dump :
+00000010	FFFFFB01 FFFFEE10 00000012 00000001 
+00000014	00000002 00000003 00000004 00000005 
+00000018	0000000F
+
+Output has the current sum value at location 0x18 with value 0x0000000F ( which is the sum of all values from 0x13 to 0x17 ) 
+
+2)
+
+#Input: 
+./emu max.o
+
+
+#Output: 
+
+write -bd to see before memory dump
+
+Before Dump:
+
+00000018	00000012 0000000A 00000002 FFFFFFFD 
+0000001c	00000004 00000032 00000000 00000000
+
+To complete whole program and see final memory write "-ad"
+
+After Dump:
+
+00000018	00000012 0000000A 00000002 FFFFFFFD 
+0000001c	00000004 00000032 00000032 00000005
+
+
+Output has the current maximum value at location 0x1e with value 0x00000005 ( which is the maximum of all values from 0x19 to 0x1d )
+
+
+3)
+#Input:
+./emu min.o
+
+#Output: 
+
+write -bd to see before memory dump
+
+Before Dump:
+
+0000001c	FFFFE710 00000012 0000000A 00000002 
+00000020	FFFFFFFD 00000004 00000032 00000000
+
+To complete whole program and see final memory write "-ad"
+
+After Dump:
+
+0000001c	FFFFE710 00000012 0000000A 00000002 
+00000020	FFFFFFFD 00000004 00000032 FFFFFFFD
+
+
+Output has the current maximum value at location 0x23 with value 0xFFFFFFFD ( which is the minimum of all values from 0x1e to 0x22 )
+
+4)
+#Input:
+./emu bubblesort.o
+
+#Output: 
+
+write -bd to see before memory dump
+
+Before Dump:
+
+0000004c	00000032 00000005 00000002 00000001 
+00000050	00000008 00000001 00000001 00000003 
+00000054	00000004 00000007 00000007
+These are the 10 array values
+
+To complete whole program and see final memory write "-ad"
+
+After Dump :
+0000004c	00000032 00000008 00000007 00000007 
+00000050	00000005 00000004 00000003 00000002 
+00000054	00000001 00000001 00000001
+
+Here we can see that the array values are sorted in decreasing order.
+
+
+
+
+
+
+
+
+
+
